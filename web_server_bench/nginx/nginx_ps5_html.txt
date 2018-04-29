@@ -1,0 +1,126 @@
+ubuntu@ip-172-31-26-17:~/apps/nginx/sbin$ ps -ef | grep nginx
+root      7979     1  0 18:26 ?        00:00:00 nginx: master process ./nginx
+ubuntu    7980  7979  0 18:26 ?        00:00:00 nginx: worker process
+ubuntu    7981  7979  0 18:26 ?        00:00:00 nginx: worker process
+ubuntu    7982  7979  0 18:26 ?        00:00:00 nginx: worker process
+ubuntu    7983  7979  0 18:26 ?        00:00:00 nginx: worker process
+ubuntu    7984  7979  0 18:26 ?        00:00:00 nginx: worker process
+ubuntu    7986  7736  0 18:26 pts/2    00:00:00 grep --color=auto nginx
+
+# concurrency 1
+ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/index.html
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        nginx/1.14.0
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/index.html
+Document Length:        3164 bytes
+
+Concurrency Level:      1
+Time taken for tests:   1.665 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      6796000 bytes
+HTML transferred:       6328000 bytes
+Requests per second:    1201.37 [#/sec] (mean)
+Time per request:       0.832 [ms] (mean)
+Time per request:       0.832 [ms] (mean, across all concurrent requests)
+Transfer rate:          3986.57 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.5      0      16
+Processing:     0    0   0.3      0       9
+Waiting:        0    0   0.3      0       9
+Total:          1    1   0.6      1      16
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      1
+  99%      3
+ 100%     16 (longest request)
+
+
+
+
+
+
+# concurrency 1000
+ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1000 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/index.html
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        nginx/1.14.0
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/index.html
+Document Length:        3164 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   0.562 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      6796000 bytes
+HTML transferred:       6328000 bytes
+Requests per second:    3557.92 [#/sec] (mean)
+Time per request:       281.063 [ms] (mean)
+Time per request:       0.281 [ms] (mean, across all concurrent requests)
+Transfer rate:          11806.46 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       12   52  46.0     34     157
+Processing:    21  161 141.5     80     420
+Waiting:       20  152 132.0     79     407
+Total:         55  213 138.1    218     463
+
+Percentage of the requests served within a certain time (ms)
+  50%    218
+  66%    244
+  75%    324
+  80%    384
+  90%    435
+  95%    441
+  98%    462
+  99%    462
+ 100%    463 (longest request)
+ubuntu@ip-172-31-19-157:~$

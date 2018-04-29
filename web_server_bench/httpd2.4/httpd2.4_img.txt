@@ -1,0 +1,161 @@
+# 최초 start
+ubuntu@ip-172-31-26-17:~/apps/httpd2.4/bin$ ps -ef | grep httpd
+root      8169     1  0 18:55 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    8386  8169  0 18:57 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    8387  8169  0 18:57 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    8388  8169  0 18:57 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+
+# after
+ubuntu@ip-172-31-26-17:~/apps/httpd2.4/bin$ ps -ef | grep httpd
+root      8169     1  0 18:55 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9112  8169  0 19:02 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9113  8169  0 19:02 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9114  8169  0 19:02 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9196  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9238  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9266  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9267  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9324  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9325  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9326  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9327  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+daemon    9442  8169  0 19:03 ?        00:00:00 /home/ubuntu/apps/httpd2.4/bin/httpd -k restart
+ubuntu    9471  7736  0 19:04 pts/2    00:00:00 grep --color=auto httpd
+ubuntu@ip-172-31-26-17:~/apps/httpd2.4/bin$
+
+
+# processes
+ 20   0  361.1m   6.5m   2.6m S  0.0  0.7   0:00.02 httpd
+ 20   0  361.2m   6.5m   2.6m S  0.0  0.7   0:00.13 httpd
+ 20   0  361.2m   6.5m   2.7m S  0.0  0.7   0:00.08 httpd
+ 20   0  361.2m   6.5m   2.6m S  0.0  0.7   0:00.17 httpd
+ 20   0  361.1m   6.5m   2.6m S  0.0  0.7   0:00.12 httpd
+ 20   0  361.2m   6.4m   2.6m S  0.0  0.6   0:00.17 httpd
+ 20   0  361.1m   6.3m   2.6m S  0.0  0.6   0:00.29 httpd
+ 20   0  361.2m   6.0m   2.0m S  0.0  0.6   0:00.16 httpd
+ 20   0  361.1m   5.9m   2.1m S  0.0  0.6   0:00.07 httpd
+ 20   0  361.2m   5.7m   1.9m S  0.0  0.6   0:00.28 httpd
+ 20   0  361.1m   5.6m   1.8m S  0.0  0.6   0:00.28 httpd
+ 20   0  361.2m   4.7m   1.1m S  0.0  0.5   0:00.32 httpd
+ 20   0   77.8m   4.6m   3.8m S  0.0  0.5   0:00.04 httpd
+
+
+
+# 1 concurrency
+ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/sm-img.jpg
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        Apache/2.4.33
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/sm-img.jpg
+Document Length:        99132 bytes
+
+Concurrency Level:      1
+Time taken for tests:   3.121 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      198766000 bytes
+HTML transferred:       198264000 bytes
+Requests per second:    640.85 [#/sec] (mean)
+Time per request:       1.560 [ms] (mean)
+Time per request:       1.560 [ms] (mean, across all concurrent requests)
+Transfer rate:          62196.49 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0      11
+Processing:     1    1   0.5      1      13
+Waiting:        0    1   0.2      0       5
+Total:          1    2   0.7      1      14
+ERROR: The median and mean for the waiting time are more than twice the standard
+       deviation apart. These results are NOT reliable.
+WARNING: The median and mean for the total time are not within a normal deviation
+        These results are probably not that reliable.
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      2
+  75%      2
+  80%      2
+  90%      2
+  95%      2
+  98%      2
+  99%      3
+ 100%     14 (longest request)
+
+
+
+ # 1000 cuncurrency
+ ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1000 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/sm-img.jpg
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        Apache/2.4.33
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/sm-img.jpg
+Document Length:        99132 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   10.720 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      198766000 bytes
+HTML transferred:       198264000 bytes
+Requests per second:    186.56 [#/sec] (mean)
+Time per request:       5360.172 [ms] (mean)
+Time per request:       5.360 [ms] (mean, across all concurrent requests)
+Transfer rate:          18106.45 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        2   43  51.0     31    1017
+Processing:     8 1669 2581.7    569   10668
+Waiting:        2 1276 2506.1    114   10454
+Total:         14 1712 2575.5    631   10709
+
+Percentage of the requests served within a certain time (ms)
+  50%    631
+  66%    981
+  75%   3237
+  80%   3241
+  90%   3268
+  95%  10424
+  98%  10692
+  99%  10698
+ 100%  10709 (longest request)
+ubuntu@ip-172-31-19-157:~$

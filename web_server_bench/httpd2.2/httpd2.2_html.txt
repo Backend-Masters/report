@@ -1,0 +1,135 @@
+# 최초 start
+ubuntu@ip-172-31-26-17:~/apps/httpd2.2/logs$ ps -ef | grep httpd
+root      8024     1  0 18:30 ?        00:00:00 /home/ubuntu/apps/httpd2.2/bin/httpd -k restart
+daemon    8044  8024  0 18:32 ?        00:00:00 /home/ubuntu/apps/httpd2.2/bin/httpd -k restart
+daemon    8045  8024  0 18:32 ?        00:00:00 /home/ubuntu/apps/httpd2.2/bin/httpd -k restart
+daemon    8046  8024  0 18:32 ?        00:00:00 /home/ubuntu/apps/httpd2.2/bin/httpd -k restart
+daemon    8047  8024  0 18:32 ?        00:00:00 /home/ubuntu/apps/httpd2.2/bin/httpd -k restart
+daemon    8048  8024  0 18:32 ?        00:00:00 /home/ubuntu/apps/httpd2.2/bin/httpd -k restart
+ubuntu    8050  7594  0 18:32 pts/1    00:00:00 grep --color=auto httpd
+ubuntu@ip-172-31-26-17:~/apps/httpd2.2/logs$
+
+# TOP
+root      20   0   30.5m   3.4m   2.8m S  0.0  0.3   0:00.03 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.06 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.02 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.06 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.06 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.06 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.06 httpd
+daemon    20   0   30.5m   2.4m   1.8m S  0.0  0.2   0:00.01 httpd
+
+
+# 1 concurrency
+ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/index.html
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        Apache/2.2.34
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/index.html
+Document Length:        3164 bytes
+
+Concurrency Level:      1
+Time taken for tests:   1.503 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      6834000 bytes
+HTML transferred:       6328000 bytes
+Requests per second:    1330.32 [#/sec] (mean)
+Time per request:       0.752 [ms] (mean)
+Time per request:       0.752 [ms] (mean, across all concurrent requests)
+Transfer rate:          4439.17 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.3      0       9
+Processing:     0    0   0.1      0       4
+Waiting:        0    0   0.1      0       4
+Total:          1    1   0.3      1       9
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      1
+  95%      1
+  98%      1
+  99%      1
+ 100%      9 (longest request)
+
+
+ # 1000 cuncurrency
+ ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1000 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/index.html
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        Apache/2.2.34
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/index.html
+Document Length:        3164 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   1.789 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      6834000 bytes
+HTML transferred:       6328000 bytes
+Requests per second:    1118.24 [#/sec] (mean)
+Time per request:       894.258 [ms] (mean)
+Time per request:       0.894 [ms] (mean, across all concurrent requests)
+Transfer rate:          3731.49 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0   12  12.0     11      42
+Processing:    16  304 362.5     69    1762
+Waiting:       16  304 362.5     69    1762
+Total:         17  316 371.6     81    1782
+
+Percentage of the requests served within a certain time (ms)
+  50%     81
+  66%    473
+  75%    504
+  80%    519
+  90%    917
+  95%    960
+  98%    982
+  99%   1780
+ 100%   1782 (longest request)
+ubuntu@ip-172-31-19-157:~$

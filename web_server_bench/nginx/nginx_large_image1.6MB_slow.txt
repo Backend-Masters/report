@@ -1,0 +1,55 @@
+ubuntu@ip-172-31-19-157:~$ ab -n 1000 -c 100 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/img.jpg
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        nginx/1.14.0
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/img.jpg
+Document Length:        1837784 bytes
+
+Concurrency Level:      100
+Time taken for tests:   74.345 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      1838025000 bytes
+HTML transferred:       1837784000 bytes
+Requests per second:    13.45 [#/sec] (mean)
+Time per request:       7434.504 [ms] (mean)
+Time per request:       74.345 [ms] (mean, across all concurrent requests)
+Transfer rate:          24143.46 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        1  488 1068.2     20   15141
+Processing:   746 4840 6013.3   2658   57941
+Waiting:        5  218 1155.6     21   27577
+Total:        830 5328 6315.3   3057   58956
+
+Percentage of the requests served within a certain time (ms)
+  50%   3057
+  66%   3970
+  75%   4970
+  80%   6076
+  90%  13457
+  95%  18505
+  98%  26039
+  99%  30312
+ 100%  58956 (longest request)
+ubuntu@ip-172-31-19-157:~$

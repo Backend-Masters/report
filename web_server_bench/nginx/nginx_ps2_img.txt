@@ -1,0 +1,114 @@
+# concurrency 1
+ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/sm-img.jpg
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        nginx/1.14.0
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/sm-img.jpg
+Document Length:        99132 bytes
+
+Concurrency Level:      1
+Time taken for tests:   3.728 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      198740000 bytes
+HTML transferred:       198264000 bytes
+Requests per second:    536.51 [#/sec] (mean)
+Time per request:       1.864 [ms] (mean)
+Time per request:       1.864 [ms] (mean, across all concurrent requests)
+Transfer rate:          52063.90 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.5      0      19
+Processing:     1    1   0.4      1       7
+Waiting:        0    0   0.3      0       6
+Total:          1    2   0.7      2      21
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      2
+  95%      3
+  98%      3
+  99%      4
+ 100%     21 (longest request)
+
+
+
+# concurrency 1000
+ubuntu@ip-172-31-19-157:~$ ab -n 2000 -c 1000 http://ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com/static/sm-img.jpg
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com (be patient)
+Completed 200 requests
+Completed 400 requests
+Completed 600 requests
+Completed 800 requests
+Completed 1000 requests
+Completed 1200 requests
+Completed 1400 requests
+Completed 1600 requests
+Completed 1800 requests
+Completed 2000 requests
+Finished 2000 requests
+
+
+Server Software:        nginx/1.14.0
+Server Hostname:        ec2-13-209-35-113.ap-northeast-2.compute.amazonaws.com
+Server Port:            80
+
+Document Path:          /static/sm-img.jpg
+Document Length:        99132 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   11.275 seconds
+Complete requests:      2000
+Failed requests:        0
+Total transferred:      198740000 bytes
+HTML transferred:       198264000 bytes
+Requests per second:    177.38 [#/sec] (mean)
+Time per request:       5637.615 [ms] (mean)
+Time per request:       5.638 [ms] (mean, across all concurrent requests)
+Transfer rate:          17213.13 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        4   58 180.9     25    1052
+Processing:    16 1342 1514.4    436   11227
+Waiting:        3  892 1319.1     57   11224
+Total:         22 1401 1507.4    500   11265
+
+Percentage of the requests served within a certain time (ms)
+  50%    500
+  66%   1422
+  75%   3506
+  80%   3534
+  90%   3627
+  95%   3823
+  98%   3831
+  99%   3832
+ 100%  11265 (longest request)
+ubuntu@ip-172-31-19-157:~$
