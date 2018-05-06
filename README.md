@@ -27,7 +27,9 @@ Back-end Master
      - Understanding of Deploy
        - Docker
          - Kubernetes vs Mesos
+1. Logging
 1. Performance Test
 1. Others
    - MSA (Micro Service Architecture)
-    - Spring Cloud
+     * Spring Cloud
+   
