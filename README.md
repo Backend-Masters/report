@@ -4,15 +4,19 @@ Back-end Master
 1. Understanding of HTTP(HTTPS) - 180422
     - Apache httpd vs nginx - 180429
 1. Enhance Performance
-    - Scalability
+    - Scalability - 180506
       - Scale Up
       - Scale Out
-    - Cache
+    - Cache - 180506, 180520
       - Web cache
       - Varnish
     - WAS
-      - Redis
-      - Memcached
+      - Redis 
+        * Introduction to Redis - 180520
+        * Redis Clustering pt.1 - 180527
+        * Redis Sharding - 180527
+        * Redis client (Java) example - 180527
+      - Memcached - 180520
       - ehcache
    - Asynchronous Programming
      - sync vs async
