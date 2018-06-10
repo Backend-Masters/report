@@ -2,30 +2,31 @@
 
 ### I/O models and Sync-Async
 - Four types of I/O models
-![Four types of I/O models](https://www.ibm.com/developerworks/library/l-async/figure1.gif)
+    * ![Four types of I/O models](https://www.ibm.com/developerworks/library/l-async/figure1.gif)
 
-    1. Synchronous blocking I/O
-        * ![Synchronous blocking I/O](https://www.ibm.com/developerworks/library/l-async/figure2.gif)
-        * The application blocks until the system call is complete (data transferred or error).
-   
-    2. Synchronous non-blocking I/O
-        * ![Synchronous non-blocking I/O](https://www.ibm.com/developerworks/library/l-async/figure3.gif)
-        * In this model, a device is opened as non-blocking. This means that instead of completing an I/O immediately, a read may return an error code indicating that the command could not be immediately satisfied (EAGAIN or EWOULDBLOCK)
-        * Application may call numerous times to await the read completion.
-        * This can be extremely inefficient.
-            
-    3. Asynchronous blocking I/O
-        * ![Asynchronous blocking I/O](https://www.ibm.com/developerworks/library/l-async/figure4.gif)
-        * In this model, non-blocking I/O is configured, and then the blocking select system call is used to determine when there's any activity for an I/O descriptor.
-        * So, IO is non-blocking, notification(kernel to application) is blocking
-        * select is not very efficient. Not advisable for high performance I/O.
-    
-    4. Asynchronous non-blocking I/O (AIO) **Our interest**
-        * ![Asynchronous non-blocking I/O (AIO)](https://www.ibm.com/developerworks/library/l-async/figure5.gif)
-        * The read request returns immediately, indicating that the read was successfully initiated.
-        * The application can then perform other processing while the background read operation completes.
-        * When the read response arrives, *a signal or a thread-based callback* can be generated to complete the I/O transaction.
-        * When many slow I/O call happens, threads can be fully operational regardless of I/O blocking.  
+
+1. Synchronous blocking I/O
+    * ![Synchronous blocking I/O](https://www.ibm.com/developerworks/library/l-async/figure2.gif)
+    * The application blocks until the system call is complete (data transferred or error).
+
+2. Synchronous non-blocking I/O
+    * ![Synchronous non-blocking I/O](https://www.ibm.com/developerworks/library/l-async/figure3.gif)
+    * In this model, a device is opened as non-blocking. This means that instead of completing an I/O immediately, a read may return an error code indicating that the command could not be immediately satisfied (EAGAIN or EWOULDBLOCK)
+    * Application may call numerous times to await the read completion.
+    * This can be extremely inefficient.
+        
+3. Asynchronous blocking I/O
+    * ![Asynchronous blocking I/O](https://www.ibm.com/developerworks/library/l-async/figure4.gif)
+    * In this model, non-blocking I/O is configured, and then the blocking select system call is used to determine when there's any activity for an I/O descriptor.
+    * So, IO is non-blocking, notification(kernel to application) is blocking
+    * select is not very efficient. Not advisable for high performance I/O.
+
+4. Asynchronous non-blocking I/O (AIO) **Our interest**
+    * ![Asynchronous non-blocking I/O (AIO)](https://www.ibm.com/developerworks/library/l-async/figure5.gif)
+    * The read request returns immediately, indicating that the read was successfully initiated.
+    * The application can then perform other processing while the background read operation completes.
+    * When the read response arrives, *a signal or a thread-based callback* can be generated to complete the I/O transaction.
+    * When many slow I/O call happens, threads can be fully operational regardless of I/O blocking.  
 
 > ref : [Boost application performance using asynchronous I/O](https://www.ibm.com/developerworks/library/l-async)
 > ref(translated in Korean) : [Asynchronous IO 개념 정리](https://djkeh.github.io/articles/Boost-application-performance-using-asynchronous-IO-kor/)
