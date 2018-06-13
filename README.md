@@ -1,5 +1,7 @@
 Back-end Master 
 
+[Youtube Channel](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
+
 1. Understanding of Client-Server Model - 180422
 1. Understanding of HTTP(HTTPS) - 180422
     - Apache httpd vs nginx - 180429
@@ -14,17 +16,19 @@ Back-end Master
       - Redis 
         * Introduction to Redis - 180520
         * Redis Clustering pt.1 - 180527
+        * Redis Clustering pt.2 - 180603
         * Redis Sharding - 180527
         * Redis client (Java) example - 180527
       - Memcached - 180520
-      - ehcache
+      - ehcache - 180603
    - Asynchronous Programming
-     - sync vs async
-     - Understading of Node.js engine
-     - Reactive Programming
+     - sync vs async - 180610
+     - Understading of Node.js engine - 180610
+     - Reactive Programming 
+       - To be continued
 1. Build, Test, Deploy (CI / CD)
    - Understanding of Build, Deploy and Test
-     - Maven, Gradle
+     - (Java) Maven, Gradle / (JS) npm, webpack, grunt
      - xUnit
    - Understanding of CI/CD (Continuous Integration / Continuous Deliver)
      - Jenkins
@@ -35,5 +39,14 @@ Back-end Master
 1. Performance Test
 1. Others
    - MSA (Micro Service Architecture)
-     * Spring Cloud
+     - Spring Cloud
+   - Reactive Programming (for Java)
+     - (prerequisite) Lambda for Java8
+     - (prerequisite) Stream API for Java8
+     - Reactive Programming
+     - RxJava
+     - Spring5 reactor
+        
+     
+
    
