@@ -1,6 +1,6 @@
-Back-end Master 
+# Back-end Master 
 
-[Youtube Channel](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
+### [Lectures on Youtube](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
 
 1. Understanding of Client-Server Model - 180422
 1. Understanding of HTTP(HTTPS) - 180422
@@ -28,25 +28,32 @@ Back-end Master
        - To be continued
 1. Build, Test, Deploy (CI / CD)
    - Understanding of Build, Deploy and Test
-     - (Java) Maven, Gradle / (JS) npm, webpack, grunt
+     - (Java) Maven, Gradle
+     - (JS) npm, webpack, grunt
      - xUnit
-   - Understanding of CI/CD (Continuous Integration / Continuous Deliver)
-     - Jenkins
-     - Understanding of Deploy
-       - Docker
+   - Understanding of CI/CD (Continuous Integration / Continuous Delivery)
+     - Tools
+       - Jenkins
+       - Atlassian products
+         - Jira, Bamboo, Confluence, etc
+   - Understanding of Deploy
+     - Deploy automation
+     - Docker
+       - Docker orchestration
+         - Shipdock
          - Kubernetes vs Mesos
 1. Logging
 1. Performance Test
+1. Architecture
+  - MSA (Micro Service Architecture)
+    - Spring Cloud
 1. Others
-   - MSA (Micro Service Architecture)
-     - Spring Cloud
    - Reactive Programming (for Java)
      - (prerequisite) Lambda for Java8
      - (prerequisite) Stream API for Java8
      - Reactive Programming
      - RxJava
      - Spring5 reactor
-        
-     
-
-   
+   - Versioning
+     - git
+       - gitflow
