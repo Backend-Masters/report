@@ -1,6 +1,6 @@
 # Back-end Master 
 
-### [Lectures on Youtube](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
+### [Lectures on Youtube (Korean)](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
 
 1. Understanding of Client-Server Model - 180422
 1. Understanding of HTTP(HTTPS) - 180422
@@ -26,12 +26,13 @@
      - Understading of Node.js engine - 180610
      - Reactive Programming 
        - To be continued
-1. Build, Test, Deploy (CI / CD)
-   - Understanding of Build, Deploy and Test
+1. ALM, Build, Test, Deploy (CI / CD)
+   - Introduction to ALM / CI
+   - Build, Deploy and Test
      - (Java) Maven, Gradle
      - (JS) npm, webpack, grunt
      - xUnit
-   - Understanding of CI/CD (Continuous Integration / Continuous Delivery)
+   - CI/CD (Continuous Integration / Continuous Delivery)
      - Tools
        - Jenkins
        - Atlassian products
