@@ -27,11 +27,11 @@
      - Reactive Programming 
        - To be continued
 1. ALM, Build, Test, Deploy (CI / CD)
-   - Introduction to ALM / CI
    - Build, Deploy and Test
      - (Java) Maven, Gradle
      - (JS) npm, webpack, grunt
      - xUnit
+   - Introduction to ALM / CI
    - CI/CD (Continuous Integration / Continuous Delivery)
      - Tools
        - Jenkins
