@@ -1,6 +1,6 @@
 # Back-end Master 
 
-### [Lectures on Youtube (Korean)](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
+### [Group Study Videos on Youtube(Korean)](https://www.youtube.com/playlist?list=PLNjS6j7Xf4qj8kKE3XkhirE6RTDjSicsa)
 
 1. Understanding of Client-Server Model - 180422
 1. Understanding of HTTP(HTTPS) - 180422
@@ -28,22 +28,28 @@
        - To be continued
 1. ALM, Build, Test, Deploy (CI / CD)
    - Build, Deploy and Test
-     - (Java) Maven, Gradle
-     - (JS) npm, webpack, grunt
-     - xUnit
-   - Introduction to ALM / CI
-   - CI/CD (Continuous Integration / Continuous Delivery)
+     - (Java) Maven, Gradle - 180617
+       * Build Lifecycle - 180701
+       * Dependency management - 180701
+     - (JS) npm, webpack, grunt - 180617
+     - xUnit - 180708
+   - Introduction to ALM / CI - 180701
+   - CI/CD (Continuous Integration / Continuous Delivery) - 180701
      - Tools
        - Jenkins
        - Atlassian products
          - Jira, Bamboo, Confluence, etc
    - Understanding of Deploy
-     - Deploy automation
+     - Deploy automation - 180708
      - Docker
+       - Understanding of Docker - 180715
+       - Simple usage of Docker - 180715
        - Docker orchestration
          - Shipdock
-         - Kubernetes vs Mesos
+         - Swarm vs Kubernetes
 1. Logging
+   - (Java) log4j, logback, slf4j
+   - ELK stack (Elasticsearch + Logstash + Kibana)
 1. Performance Test
 1. Architecture
   - MSA (Micro Service Architecture)
@@ -58,3 +64,4 @@
    - Versioning
      - git
        - gitflow
+   - TDD - 180708
