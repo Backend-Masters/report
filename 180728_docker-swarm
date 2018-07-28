@@ -80,3 +80,6 @@ docker service ps whoami
 curl 명령을 날렸을 때, 다른 컨테이너의 ID가 호출됨을 확인할 수 있습니다.
 
 
+#5. docker swarm network overlay bugs
+https://github.com/moby/moby/issues/32195
+
