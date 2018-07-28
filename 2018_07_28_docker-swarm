@@ -1,0 +1,82 @@
+
+Docker는 Container 이미지를 쉽게 다운로드 받아 실행시킬 수 있을뿐 아니라 Container Ochestration을 쉽게 할 수 있다는 장점이 있습니다.
+Container Ochestration 이란 여러대의 서버와 여러 개의 서비스를 편리하게 관리해주는 작업이라고 할 수 있습니다. 
+그 안에는 스케줄링, 클러스터링, 서비스 디스커버리, 로깅, 모니터링의 내용이 포함되어있습니다.
+
+규모가 작은 서버를 관리할때는 고려가 되지 않지만 여러대의 서버와 서비스 관리를 직접 수작업으로 관리하기란 쉽지 않습니다. 
+특정 서버에서 요청에 대한 분산처리를 하기 위해선 중앙 서버에서 해당 내용을 구성 후 하위의 분산 처리를 받는 서버에서도 작업을 따로 해주며
+모니터링도 해야하며 scale up & down 에 대한 내용도 고려하다보면 2~5대의 서버에서는 해 볼만하지만 
+수십, 수백, 수천개의 서비스로 구성된 서버에서는 쉽지가 않습니다.
+
+따라서 이러한 관리를 위해 Docker Swarm 뿐만 아니라 Kubernetes(google), ECS(EC2 Container Service - AWS), Mesos(Apache) 등 Container Ochestration Tool 이 존재합니다.
+
+
+
+#1. Docker swarm 에서 사용하는 용어
+ 
+Node : 스웜 클러스터에 속한 Docker Server의 단위 입니다. 보통 하나의 Server 에 하나의 Docker 만 실행하기 때문에 Server가 곧 Node라고 생각하면됩니다.
+
+Manager Node : Node 중에서도 관리자에 해당되는 Node입니다. Manager Node 도 Worker Node가 될 수 있고 Swarm 관련 명령어는 이 Node에서만 실행 가능합니다.
+
+Worker Node : Manager Node의 명령을 받아 Container를 생성하고 상태를 체크하는 Node입니다.
+
+Service : 기본적인 Swarm 의 실행 단위 입니다. 하나의 Service는 특정 하나의 이미지를 기반으로 생성되고 동일한 Container를 여러개 실행 할 수 있습니다.
+
+
+#2. 서버 구성
+총 3대의 서버(73,89,93)를 클러스터링.
+Manager Node - 73(fox)
+Worker Node - 89(wolf), 93(cow)
+
+
+#3. Swarm Cluster 만들기
+1) Swarm Cluster 는 Manager Node를 먼저 생성 후 Worker 노드에서 Manager Node에 접속할 수 있도록 해야합니다. 
+73서버에서 swarm init 명령어를 사용하여 해당 서버를 매니저 노드로 등록합니다. 
+>>Input
+docker swarm init --advertise-addr x.x.x.73
+
+>>Output
+Swarm initialized: current node (07e6dyuuxghhv92qoqsu5cf31) is now a manager.
+To add a worker to this swarm, run the following command:
+    docker swarm join \
+    --token SWMTKN-1-39yju6tqsxyckcmc746p6215jemc9pccdngiylny9ghybnrtza-8rsnmbb161p9646akgt8yjuwj \
+    218.38.15.94:2377
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+2) Output에서 worker node가 swarm cluster에 포함되기 위한 명령어를 확인할 수 있습니다.
+이를 각 worker node에서 실행시킵니다. 
+
+
+3) swarm cluster 확인하기 
+>>Input
+docker node ls
+
+"docker node ls" 처럼 노드를 관리하는 명령어는 매니저 노드에서만 사용할 수 있습니다. 
+
+
+#4 어플리케이션 실행하기
+docker hub에 popoya67/whoami 라는 이미지를 등록시켰습니다. 이 이미지는 실행되는 서버의 hostname을 출력하는 단순한 웹 어플리케이션입니다.
+
+이 이미지에 대한 서비스(=컨테이너)를 생성해보고, 서비스의 갯수를 증설해보겠습니다.
+"docker pull popoya67/whoami" 명령어로 docker hub로부터 이미지를 받습니다. (이외의 어플리케이션을 실행시키고 싶다면, 다른 이미지를 사용하셔도 됩니다.)
+
+그리고 이 이미지를 서비스로 만들기 위해 service create 명령어를 사용합니다. 
+docker service create --name whoami -p 4567:4567 popoya67/whoami
+docker service ps whoami
+
+정상적으로 서비스가 실행되었는지 Http요청 테스트를 해보겠습니다.
+
+curl x.x.x.73:4567
+curl x.x.x.89:4567
+다음과 같은 명령어를 입력했을 때, 컨테이너의 ID가 출력되면 서비스를 성공적으로 생성한 것입니다. 
+
+73서버에 띄운 서비스에 89서버로 접근이 가능함.
+이게 가능한 이유는 ingress network 때문.
+https://docs.docker.com/get-started/part4/#accessing-your-cluster
+
+docker service scale whoami=3
+docker service ps whoami
+
+curl 명령을 날렸을 때, 다른 컨테이너의 ID가 호출됨을 확인할 수 있습니다.
+
+
